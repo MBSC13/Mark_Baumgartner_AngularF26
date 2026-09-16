@@ -1,6 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+
+
 @Component({
   imports: [RouterOutlet],
   selector: 'app-root',
@@ -8,5 +10,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('Lab2');
+  protected readonly title = signal('Mark');
+  name = "Mark Baumgartner";
+  class = "MAD307 JS Frameworks";
 }
