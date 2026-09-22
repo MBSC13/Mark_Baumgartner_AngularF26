@@ -11,7 +11,7 @@
     }
   },
   "projects": {
-    "Lab2": {
+    "Mark_Baumgartner_AngularF26": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Lab2:build:production"
+              "buildTarget": "Mark_Baumgartner_AngularF26:build:production"
             },
             "development": {
-              "buildTarget": "Lab2:build:development"
+              "buildTarget": "Mark_Baumgartner_AngularF26:build:development"
             }
           },
           "defaultConfiguration": "development"

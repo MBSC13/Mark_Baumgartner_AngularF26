@@ -11,7 +11,7 @@ import { Mtg } from './shared/models/mtg';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('Lab2');
+  protected readonly title = signal('Mark_Baumgartner_AngularF26');
   name = "Mark Baumgartner";
   class = "MAD307 JS Frameworks";
 
