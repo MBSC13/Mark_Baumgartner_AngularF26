@@ -4,9 +4,9 @@ export interface Mtg {
   color: string;
   manaCost: string | number;
   cardType: string;
-  creatureType: string;
-  power: number;
-  toughness: number;
-  cardText: string;
-  foil?: boolean;
+  // cardText: string;
+  creatureType?: string;
+  // power?: number;
+  // toughness?: number;
+  // foil?: boolean;
 }

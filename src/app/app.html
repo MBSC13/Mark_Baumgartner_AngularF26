@@ -5,9 +5,23 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>MtG Card Info</title>
 </head>
 <body>
-<h1>Hello, I'm {{ name }}, and this is Assignment 1 for {{ class }}.</h1>
+<h2>MtG Card Info</h2>
+<div class="container">
+
+@for (card of mtgCards //noinspection ForBlockNonIterableVar; track card.id) {
+  <div class="mtgcard-card">
+    {{ card.name }}, {{ card.manaCost }}, {{ card.cardType }}
+    @if (card.creatureType) {
+       - {{ card.creatureType}}
+    }
+  </div>
+} @empty {
+  <br>
+  <p>There's nothing here!</p>
+}
+</div>
 </body>
 </html>

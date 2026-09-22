@@ -1,0 +1,28 @@
+$primary-color: #033716;
+$secondary-color: white;
+
+h2 {
+  text-align: center;
+  font-family: "Segoe UI", serif;
+  font-size: xxx-large;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: "Segoe UI", serif;
+  text-align: left;
+}
+
+.mtgcard-card {
+  background-color: $primary-color;
+  color: $secondary-color;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px #303A34;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  text-shadow: #303A34 1px 1px;
+}
