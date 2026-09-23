@@ -9,19 +9,6 @@
 </head>
 <body>
 <h2>MtG Card Info</h2>
-<div class="container">
-
-@for (card of mtgCards //noinspection ForBlockNonIterableVar; track card.id) {
-  <div class="mtgcard-card">
-    {{ card.name }}, {{ card.manaCost }}, {{ card.cardType }}
-    @if (card.creatureType) {
-       - {{ card.creatureType}}
-    }
-  </div>
-} @empty {
-  <br>
-  <p>There's nothing here!</p>
-}
-</div>
+<app-mtg-list></app-mtg-list>
 </body>
 </html>
