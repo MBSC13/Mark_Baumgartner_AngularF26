@@ -1,0 +1,21 @@
+<div class="mtgcard-card" [class]="card().color">
+  <h3>{{ card().name }}</h3>
+  <p>Color: {{ card().color }}
+    <br>
+  Mana Cost: {{ card().manaCost }}
+    <br>
+  Card Type: {{ card().cardType }}</p>
+  @if (card().creatureType) {
+    <p>Secondary Type: {{ card().creatureType }}</p>
+  }
+
+  @switch (card().cardType) {
+    @case ('creature') { <span class="badge creature">Creature</span> }
+    @case ('artifact') { <span class="badge artifact">Artifact</span> }
+    @case ('instant') { <span class="badge instant">Instant</span> }
+    @case ('sorcery') { <span class="badge sorcery">Sorcery</span> }
+    @case ('enchantment') { <span class="badge enchantment">Enchantment</span> }
+    @case ('land') { <span class="badge land">Land</span> }
+    @default { <span class="badge">Other</span> }
+  }
+</div>

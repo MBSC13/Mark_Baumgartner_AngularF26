@@ -1,0 +1,6 @@
+@for (card of mtgCards(); track card.id) {
+  <app-mtg-list-item [card] = "card"/>
+} @empty {
+  <br>
+  <p>There's nothing here!</p>
+}

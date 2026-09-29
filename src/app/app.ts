@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Mtg } from './shared/models/mtg';
-import { MtgList } from './shared/mtg-list/mtg-list';
+import { MtgList } from './Components/mtg-list/mtg-list';
 
 @Component({
   imports: [RouterOutlet, MtgList],
