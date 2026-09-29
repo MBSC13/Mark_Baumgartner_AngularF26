@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Mtg } from '../models/mtg';
+import { MtgListItem } from '../mtg-list-item/mtg-list-item';
 
 @Component({
   imports: [],
@@ -29,7 +30,7 @@ export class MtgList {
       name: 'Prismatic Lace',
       color: 'U',
       manaCost: 'U',
-      cardType: 'Instant' 
+      cardType: 'Instant'
     },
     {
       id: 4,
@@ -52,4 +53,5 @@ export class MtgList {
       cardType: 'Instant'
     },
   ];
+  protected readonly MtgListItem = MtgListItem;
 }

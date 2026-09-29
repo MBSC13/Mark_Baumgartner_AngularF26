@@ -1,1 +1,11 @@
-<p>mtg-list works!</p>
+@for (card of MtgListItem; track card.id) {
+  <div class="mtgcard-card">
+    {{ card.name }}, {{ card.manaCost }}, {{ card.cardType }}
+    @if (card.creatureType) {
+      - {{ card.creatureType}}
+    }
+  </div>
+} @empty {
+  <br>
+  <p>There's nothing here!</p>
+}
