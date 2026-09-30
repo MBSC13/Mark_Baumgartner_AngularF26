@@ -1,21 +1,24 @@
-<div class="mtgcard-card" [class]="card().color">
+<div class="mtgcard-card" [class]="card().color" (click)="toggle()">
   <h3>{{ card().name }}</h3>
   <p>Color: {{ card().color }}
     <br>
-  Mana Cost: {{ card().manaCost }}
-    <br>
-  Card Type: {{ card().cardType }}</p>
-  @if (card().creatureType) {
-    <p>Secondary Type: {{ card().creatureType }}</p>
-  }
-
-  @switch (card().cardType) {
-    @case ('creature') { <span class="badge creature">Creature</span> }
-    @case ('artifact') { <span class="badge artifact">Artifact</span> }
-    @case ('instant') { <span class="badge instant">Instant</span> }
-    @case ('sorcery') { <span class="badge sorcery">Sorcery</span> }
-    @case ('enchantment') { <span class="badge enchantment">Enchantment</span> }
-    @case ('land') { <span class="badge land">Land</span> }
+    Mana Cost: {{ card().manaCost }}</p>
+  <div class="colorBadge">
+  @switch (card().color) {
+    @case ('Red') { <img ngSrc="/images/red.png" height="64" width="64" alt=""> }
+    @case ('Blue') { <img ngSrc="/images/blue.png" height="64" width="64" alt=""> }
+    @case ('Green') { <img ngSrc="/images/green.png" height="64" width="64" alt=""> }
+    @case ('Black') { <img ngSrc="/images/black.png" height="64" width="64" alt=""> }
+    @case ('White') { <img ngSrc="/images/white.png" height="64" width="64" alt=""> }
+    @case ('Colorless') { <img ngSrc="/images/colorless.svg" height="64" width="64" alt=""> }
     @default { <span class="badge">Other</span> }
+  }
+  </div>
+
+  @if (expanded) {
+    <p>Card Type: {{ card().cardType }}</p>
+    @if (card().creatureType) {
+      <p>Creature Type: {{ card().creatureType }}</p>
+    }
   }
 </div>

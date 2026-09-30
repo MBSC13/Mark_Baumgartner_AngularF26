@@ -1,6 +1,9 @@
 @for (card of mtgCards(); track card.id) {
-  <app-mtg-list-item [card] = "card"/>
+  <app-mtg-list-item
+    [card] = "card"
+  (opened) = "onCardOpened($event)"/>
 } @empty {
   <br>
   <p>There's nothing here!</p>
 }
+

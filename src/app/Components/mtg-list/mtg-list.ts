@@ -39,4 +39,8 @@ export class MtgList {
     { id: 6, name: "Chandra's Outrage", color: 'Red', manaCost: '2RR', cardType: 'Instant' },
   ]);
   protected readonly MtgListItem = MtgListItem;
+
+  onCardOpened (card:Mtg) {
+    console.log(card.name + " was clicked")
+  }
 }
