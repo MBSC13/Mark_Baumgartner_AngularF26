@@ -9,36 +9,6 @@ import { MtgListItem } from '../mtg-list-item/mtg-list-item';
   templateUrl: './mtg-list.html',
 })
 export class MtgList {
-  mtgCards = signal<Mtg[]>([
-    {
-      id: 1,
-      name: 'Guile',
-      color: 'Blue',
-      manaCost: '3UUU',
-      cardType: 'Creature',
-      creatureType: 'Elemental Incarnation',
-    },
-    {
-      id: 2,
-      name: 'Mass of Ghouls',
-      color: 'Black',
-      manaCost: '3BB',
-      cardType: 'Creature',
-      creatureType: 'Zombie Warrior',
-    },
-    { id: 3, name: 'Prismatic Lace', color: 'Blue', manaCost: 'U', cardType: 'Instant' },
-    {
-      id: 4,
-      name: "Executioner's Hood",
-      color: 'Colorless',
-      manaCost: 2,
-      cardType: 'Artifact',
-      creatureType: 'Equipment',
-    },
-    { id: 5, name: 'Channel', color: 'Green', manaCost: 'GG', cardType: 'Sorcery' },
-    { id: 6, name: "Chandra's Outrage", color: 'Red', manaCost: '2RR', cardType: 'Instant' },
-  ]);
-  protected readonly MtgListItem = MtgListItem;
 
   onCardOpened (card:Mtg) {
     console.log(card.name + " was clicked")
