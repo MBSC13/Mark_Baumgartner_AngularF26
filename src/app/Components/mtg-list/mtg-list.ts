@@ -13,6 +13,7 @@ export class MtgList {
 
   //Inject MtgService
   private mtgService = inject(MtgService);
+  protected secondaryCount = this.mtgService.secondaryCount();
 
   //Point template towards read-only mtgList
   mtgList = this.mtgService.mtgList;

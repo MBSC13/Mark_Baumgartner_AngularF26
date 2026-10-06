@@ -1,4 +1,4 @@
-import { Service, signal } from '@angular/core';
+import { computed, effect, Service, signal } from '@angular/core';
 import { Mtg } from '../shared/models/mtg';
 
 @Service()
@@ -10,14 +10,15 @@ export class MtgService {
       color: 'Blue',
       manaCost: '3UUU',
       cardType: 'Creature',
-      creatureType: 'Elemental Incarnation' },
+      creatureType: 'Elemental Incarnation',
+    },
     {
       id: 2,
       name: 'Mass of Ghouls',
       color: 'Black',
       manaCost: '3BB',
       cardType: 'Creature',
-      creatureType: 'Zombie Warrior'
+      creatureType: 'Zombie Warrior',
     },
 
     {
@@ -25,7 +26,7 @@ export class MtgService {
       name: 'Prismatic Lace',
       color: 'Blue',
       manaCost: 'U',
-      cardType: 'Instant'
+      cardType: 'Instant',
     },
     {
       id: 4,
@@ -33,22 +34,45 @@ export class MtgService {
       color: 'Colorless',
       manaCost: 2,
       cardType: 'Artifact',
-      creatureType: 'Equipment' },
+      creatureType: 'Equipment',
+    },
     {
       id: 5,
       name: 'Channel',
       color: 'Green',
       manaCost: 'GG',
-      cardType: 'Sorcery' },
+      cardType: 'Sorcery',
+    },
 
     {
       id: 6,
       name: "Chandra's Outrage",
       color: 'Red',
       manaCost: '2RR',
-      cardType: 'Instant' }
+      cardType: 'Instant',
+    },
   ]);
 
   //Read-only version for components to consume
   mtgList = this.mtgCards.asReadonly();
+
+  //addCard method to add a new item to the list using update()
+  //Spread operator makes it possible to always add onto the end of the array
+  addCard(c: Mtg): void {
+    this.mtgCards.update((list) => [...list, c]);
+  }
+
+  //hasSecondary uses computed() to filter for cards with a secondary type
+  hasSecondary = computed(() => this.mtgCards().filter((c) => c.creatureType));
+
+  //cardCount tracks the total number of cards in mtgList
+  cardCount = computed(() => this.mtgList().length);
+
+  //secondaryCount computes the number of cards with a second type based on above method output
+  secondaryCount = computed(() => this.hasSecondary().length);
+
+  //countLog prints a message containing total card count to the console
+  countLog = effect(() => {console.log("There are now " + this.cardCount() + " cards in mtgList")});
+
+
 }
