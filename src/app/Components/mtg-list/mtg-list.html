@@ -1,26 +1,16 @@
 <div>
+  <!-- [card]="card" satisfies child's card = input.required<Mtg>() -->
   @for (card of mtgList(); track card.id) {
     <app-mtg-list-item
       [card] = "card"
-      (opened) = "onCardOpened($event)"/>
+      (opened) = "onCardOpened($event)"
+      (removeId) = "onRemove($event)" /> <!-- Listens for removeId output -->
+
   } @empty {
     <br>
     <p>There's nothing here!</p>
   }
 </div>
 <div>
-  <p>Cards with a second type: {{ secondaryCount }}</p>
+  <p>Cards with a second type: {{ secondaryCount() }}</p>
 </div>
-
-<!--<h3>Cards with a secondary type</h3>-->
-<!--<div>-->
-<!--  @for (card of hasSecondary(); track card.id) {-->
-<!--    <app-mtg-list-item -->
-<!--    [card] = "card";-->
-<!--    (opened) = "onCardOpened($event)"-->
-<!--    />-->
-<!--  } @empty {-->
-<!--    <br>-->
-<!--    <p>There's nothing here</p>-->
-<!--  }-->
-<!--</div>-->

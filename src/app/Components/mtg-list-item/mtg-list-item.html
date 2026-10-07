@@ -20,5 +20,7 @@
     @if (card().creatureType) {
       <p>Creature Type: {{ card().creatureType }}</p>
     }
+    <!--Remove button with click event listener, that then triggers removeId event and emits output up the tree-->
+    <button class="removeBtn" name="Remove" (click) = "removeId.emit(card().id)">Remove</button>
   }
 </div>

@@ -56,14 +56,8 @@ export class MtgService {
   //Read-only version for components to consume
   mtgList = this.mtgCards.asReadonly();
 
-  //addCard method to add a new item to the list using update()
-  //Spread operator makes it possible to always add onto the end of the array
-  addCard(c: Mtg): void {
-    this.mtgCards.update((list) => [...list, c]);
-  }
-
   //hasSecondary uses computed() to filter for cards with a secondary type
-  hasSecondary = computed(() => this.mtgCards().filter((c) => c.creatureType));
+  hasSecondary = computed(() => this.mtgList().filter((c) => c.creatureType));
 
   //cardCount tracks the total number of cards in mtgList
   cardCount = computed(() => this.mtgList().length);
@@ -74,5 +68,19 @@ export class MtgService {
   //countLog prints a message containing total card count to the console
   countLog = effect(() => {console.log("There are now " + this.cardCount() + " cards in mtgList")});
 
+  secondaryLog = effect(() => {
+    console.log('There are now ' + this.secondaryCount() + ' cards in mtgList');
+  })
 
+  //addCard method to add a new item to the list using update()
+  //Spread operator makes it possible to always add onto the end of the array
+  addCard(c: Mtg): void {
+    this.mtgCards.update((list) => [...list, c]);
+  }
+
+  //removeCard filters the current array by building a new one with every card whose id does not equal the one passed in.
+  //The new array replaces the old one
+  removeCard(id: number){
+    this.mtgCards.update((list) => list.filter(c => c.id !== id));
+  }
 }
