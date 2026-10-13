@@ -69,7 +69,7 @@ export class MtgService {
   countLog = effect(() => {console.log("There are now " + this.cardCount() + " cards in mtgList")});
 
   secondaryLog = effect(() => {
-    console.log('There are now ' + this.secondaryCount() + ' cards in mtgList');
+    console.log("There are " + this.secondaryCount() + " cards with secondary type in mtgList");
   })
 
   //addCard method to add a new item to the list using update()
