@@ -1,8 +1,13 @@
-import { computed, effect, Service, signal } from '@angular/core';
+import { computed, effect, inject, Service, signal } from '@angular/core';
 import { Mtg } from '../shared/models/mtg';
+import { MTG_CONFIG } from '../shared/mtg-config';
 
 @Service()
 export class MtgService {
+  private config = inject(MTG_CONFIG);
+  readonly apiBaseUrl = this.config.apiBaseUrl;
+
+
   private mtgCards = signal<Mtg[]>([
     {
       id: 1,
