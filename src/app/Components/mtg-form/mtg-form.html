@@ -1,0 +1,51 @@
+<form class="mtg-form" [formGroup]="mtgForm" (ngSubmit)="onSubmit()">
+  <label>
+    Name
+    <input formControlName="name" placeholder="Name" />
+  </label>
+  @if(mtgForm.controls.name.touched && mtgForm.controls.name.invalid) {
+    <p class="error">Name required. Minimum 2 characters.</p>
+  }
+
+  <label>
+    Color
+    <input formControlName="color" placeholder="Color" />
+  </label>
+  @if(mtgForm.controls.color.touched && mtgForm.controls.color.invalid) {
+    <p class="error">Color required. Minimum 1 character</p>
+  }
+
+  <label>
+    Mana Cost
+    <input formControlName="manaCost" placeholder="Mana Cost" />
+  </label>
+  @if(mtgForm.controls.manaCost.touched && mtgForm.controls.manaCost.invalid) {
+    <p class="error">Mana cost required.</p>
+  }
+
+  <label>
+    Card Type
+    <select formControlName="cardType">
+      <option value="creature">Creature</option>
+      <option value="artifact">Artifact</option>
+      <option value="enchantment">Enchantment</option>
+      <option value="instant">Instant</option>
+      <option value="sorcery">Sorcery</option>
+      <option value="land">Land</option>
+    </select>
+  </label>
+  @if(mtgForm.controls.cardType.touched && mtgForm.controls.cardType.invalid) {
+    <p class="error">Card type required. Select from dropdown.</p>
+  }
+
+  @if (mtgForm.get('cardType')?.value === 'creature') {
+    <div class="conditional-field">
+      <label>
+        Creature Type
+        <input formControlName="creatureType" placeholder="Creature Type" />
+      </label>
+    </div>
+  }
+
+  <button type="submit" [disabled]="mtgForm.invalid">Add Card</button>
+</form>
