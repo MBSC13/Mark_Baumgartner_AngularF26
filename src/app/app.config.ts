@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { MTG_CONFIG } from './shared/mtg-config';
 import { MtgMockService } from './services/mtg-mock-service';
@@ -8,7 +8,7 @@ import { MtgService } from './services/mtg-service';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     {
       provide: MTG_CONFIG,
       useValue:
@@ -22,6 +22,6 @@ export const appConfig: ApplicationConfig = {
           defaultCreatureType: 'Test' }
     },
 
-    { provide: MtgService, useClass: MtgMockService}
+    // { provide: MtgService, useClass: MtgMockService}
   ]
 };

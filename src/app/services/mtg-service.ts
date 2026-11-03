@@ -88,4 +88,9 @@ export class MtgService {
   removeCard(id: number){
     this.mtgCards.update((list) => list.filter(c => c.id !== id));
   }
+
+  //Returns matching mtg object, searches by id
+  getById(id: number) : Mtg | undefined {
+    return this.mtgList().find((c) => c.id === id);
+  }
 }

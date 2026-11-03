@@ -3,9 +3,10 @@ import { Mtg } from '../../shared/models/mtg';
 import { MtgListItem } from '../mtg-list-item/mtg-list-item';
 import { MtgService } from '../../services/mtg-service';
 import { MTG_CONFIG } from '../../shared/mtg-config';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [MtgListItem],
+  imports: [MtgListItem, RouterOutlet],
   selector: 'app-mtg-list',
   styleUrl: './mtg-list.scss',
   templateUrl: './mtg-list.html',

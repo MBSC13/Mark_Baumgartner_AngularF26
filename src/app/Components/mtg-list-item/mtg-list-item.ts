@@ -2,9 +2,10 @@ import { Component, inject, input, output } from '@angular/core';
 import { Mtg } from '../../shared/models/mtg';
 import { NgOptimizedImage } from '@angular/common';
 import { MtgService } from '../../services/mtg-service';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, RouterLink],
   selector: 'app-mtg-list-item',
   styleUrl: './mtg-list-item.scss',
   templateUrl: './mtg-list-item.html',

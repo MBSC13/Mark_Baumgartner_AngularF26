@@ -1,0 +1,30 @@
+@if (mtg(); as c){
+  <div class="mtgcard-card" [class]="c.color">
+    <h3>{{ c.name }}</h3>
+    <p>Color: {{ c.color }}
+      <br>
+      Mana Cost: {{ c.manaCost }}</p>
+    <p>Card Type: {{ c.cardType }}</p>
+    @if (c.creatureType) {
+      <p>Creature Type: {{ c.creatureType }}</p>
+    }
+    <div class="colorBadge">
+      @switch (c.color) {
+        @case ('Red') { <img ngSrc="/images/red.png" height="64" width="64" alt=""> }
+        @case ('Blue') { <img ngSrc="/images/blue.png" height="64" width="64" alt=""> }
+        @case ('Green') { <img ngSrc="/images/green.png" height="64" width="64" alt=""> }
+        @case ('Black') { <img ngSrc="/images/black.png" height="64" width="64" alt=""> }
+        @case ('White') { <img ngSrc="/images/white.png" height="64" width="64" alt=""> }
+        @case ('Colorless') { <img ngSrc="/images/colorless.svg" height="64" width="64" alt=""> }
+        @default { <span class="badge">Other</span> }
+      }
+    </div>
+
+    <!--Remove button with click event listener, that then triggers removeId event and emits output up the tree-->
+    <button class="removeBtn" name="Remove" (click) = "removeId.emit(c.id)">Remove</button>
+  </div>
+} @else {
+  <p>Card not found</p>
+}
+
+
