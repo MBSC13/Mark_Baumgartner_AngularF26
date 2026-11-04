@@ -1,16 +1,14 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Mtg } from './shared/models/mtg';
-import { MtgList } from './Components/mtg-list/mtg-list';
+import { AuthGuard } from './services/auth.guard';
 
 @Component({
-  imports: [RouterOutlet, MtgList],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = signal('Mark_Baumgartner_AngularF26');
-  name = 'Mark Baumgartner';
-  class = 'MAD307 JS Frameworks';
+  protected authGuard = inject(AuthGuard);
 }

@@ -1,3 +1,10 @@
-<div>
+<nav class="nav-bar">
+  <a routerLink="/mtg" routerLinkActive="active">Card List</a>
+  <a routerLink="/add" routerLinkActive="active">Add a Card</a>
+  <button (click)="authGuard.toggle()">
+    {{ authGuard.guardEnabled() ? 'Lock Editing' : 'Unlock Editing' }}
+  </button>
+</nav>
+
+
 <router-outlet />
-</div>
