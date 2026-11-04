@@ -6,7 +6,7 @@
   @if(mtgForm.controls.name.touched && mtgForm.controls.name.invalid) {
     <p class="error">Name required. Minimum 2 characters.</p>
   }
-
+  <br>
   <label>
     Color
     <input formControlName="color" placeholder="Color" />
@@ -14,14 +14,16 @@
   @if(mtgForm.controls.color.touched && mtgForm.controls.color.invalid) {
     <p class="error">Color required. Minimum 1 character</p>
   }
+  <br>
 
   <label>
     Mana Cost
     <input formControlName="manaCost" placeholder="Mana Cost" />
   </label>
-  @if(mtgForm.controls.manaCost.touched && mtgForm.controls.manaCost.invalid) {
-    <p class="error">Mana cost required.</p>
+  @if(mtgForm.controls.manaCost.touched && mtgForm.controls.manaCost.hasError('manaCost')) {
+    <p class="error">Invalid mana cost. Can only be a combination of 0 - 9 plus letters WUBRGC.</p>
   }
+  <br>
 
   <label>
     Card Type
@@ -38,6 +40,7 @@
   @if(mtgForm.controls.cardType.touched && mtgForm.controls.cardType.invalid) {
     <p class="error">Card type required. Select from dropdown.</p>
   }
+  <br>
 
   @if (mtgForm.get('cardType')?.value === 'creature') {
     <div class="conditional-field">
@@ -46,6 +49,10 @@
         <input formControlName="creatureType" placeholder="Creature Type" />
       </label>
     </div>
+  }
+
+  @if (mtgForm.hasError('colorMismatch')) {
+    <p>Mana cost colors don't match the card's colors</p>
   }
 
   <button type="submit" [disabled]="mtgForm.invalid">

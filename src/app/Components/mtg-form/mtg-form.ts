@@ -2,6 +2,8 @@ import { Component, computed, effect, inject, input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MtgService } from '../../services/mtg-service';
 import { Router } from '@angular/router';
+import { manaCostValidator } from '../../validators/mana-cost.validator';
+import { colorValidator } from '../../validators/color.validator';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -21,10 +23,12 @@ export class MtgForm {
   protected mtgForm = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
     color: ['', Validators.required],
-    manaCost: ['' as string | number, Validators.required],
+    manaCost: ['' as string | number, [Validators.required, manaCostValidator]],
     cardType: ['', Validators.required],
     creatureType: [''],
-  });
+  },
+    { validators: colorValidator}
+  );
 
   constructor() {
     effect(() => {
@@ -59,4 +63,5 @@ export class MtgForm {
     this.mtgForm.reset({ cardType: ''});
     this.router.navigate(['/mtg', id]);
   }
+
 }
