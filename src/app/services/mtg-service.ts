@@ -89,6 +89,20 @@ export class MtgService {
     this.mtgCards.update((list) => list.filter(c => c.id !== id));
   }
 
+  updateMtg(updated: Mtg): void {
+    this.mtgCards.update((list) => list.map((c) => (c.id === updated.id ? updated : c)));
+  }
+
+  //Used by the form when editing
+  getMtg(id: number): Mtg | undefined {
+    return this.getById(id);
+  }
+
+  //Used to provide an id to new mtg objects
+  nextId(): number {
+    return Math.max(0, ...this.mtgList().map((c) => c.id)) + 1;
+  }
+
   //Returns matching mtg object, searches by id
   getById(id: number) : Mtg | undefined {
     return this.mtgList().find((c) => c.id === id);

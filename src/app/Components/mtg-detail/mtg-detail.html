@@ -20,11 +20,18 @@
       }
     </div>
 
-    <!--Remove button with click event listener, that then triggers removeId event and emits output up the tree-->
-    <button class="removeBtn" name="Remove" (click) = "removeId.emit(c.id)">Remove</button>
+    <div class="buttons">
+      <!--Remove button with click event listener, that then triggers removeId event and emits output up the tree-->
+      <button class="removeBtn" name="Remove" (click) = "removeId.emit(c.id)">Remove</button>
+      <!-- Edit link to navigate to edit form -->
+      <a [routerLink]="['/edit', c.id]">Edit</a>
+    </div>
   </div>
+
+  <a routerLink="/mtg">Back to Card List</a>
 } @else {
-  <p>Card not found</p>
+  <p>No card with id {{ id() }}.</p>
+  <a routerLink="/mtg">Back to Card List</a>
 }
 
 
