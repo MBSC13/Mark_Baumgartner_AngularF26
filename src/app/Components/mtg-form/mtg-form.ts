@@ -27,7 +27,7 @@ export class MtgForm {
     cardType: ['', Validators.required],
     creatureType: [''],
   },
-    { validators: colorValidator}
+    { validators: colorValidator } //This is where you attach the Validator for the whole FormGroup
   );
 
   constructor() {
