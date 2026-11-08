@@ -11,17 +11,17 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     {
       provide: MTG_CONFIG,
-      useValue:
-        {
-          apiBaseUrl: 'https://placeholder.fake.com/api',
-          defaultId: 0,
-          defaultName: 'Testing',
-          defaultManaCost: '0',
-          defaultColor: 'Colorless',
-          defaultCardType: 'Test',
-          defaultCreatureType: 'Test' }
+      useValue: {
+        apiBaseUrl: 'https://api.scryfall.com',
+        defaultId: 0,
+        defaultName: 'Testing',
+        defaultManaCost: '0',
+        defaultColor: 'Colorless',
+        defaultCardType: 'Test',
+        defaultCreatureType: 'Test',
+      },
     },
 
     // { provide: MtgService, useClass: MtgMockService}
-  ]
+  ],
 };
