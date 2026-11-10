@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
       provide: MTG_CONFIG,
       useValue: {
         apiBaseUrl: 'https://api.scryfall.com',
-        defaultId: 0,
+        defaultId: '0',
         defaultName: 'Testing',
         defaultManaCost: '0',
         defaultColor: 'Colorless',

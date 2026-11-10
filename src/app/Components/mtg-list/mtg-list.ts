@@ -6,7 +6,7 @@ import { MTG_CONFIG } from '../../shared/mtg-config';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [MtgListItem, RouterOutlet],
+  imports: [MtgListItem],
   selector: 'app-mtg-list',
   styleUrl: './mtg-list.scss',
   templateUrl: './mtg-list.html',
@@ -20,12 +20,14 @@ export class MtgList {
 
   //Point template towards read-only mtgList
   mtgList = this.mtgService.mtgList;
+  isLoading = this.mtgService.isLoading;
+  error = this.mtgService.error;
   onCardOpened(card: Mtg) {
     console.log(card.name + ' was clicked');
   }
 
   //Takes in the output from removeId.emit and passes id up to service to run
-  onRemove(id: number) {
+  onRemove(id: string) {
     this.mtgService.removeCard(id);
   }
 }

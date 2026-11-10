@@ -16,7 +16,7 @@ export class MtgListItem {
   expanded = false;
   opened = output<Mtg>();
   //declares output event that carries a number, to hold id to pass along to removeCard
-  removeId = output<number>();
+  removeId = output<string>();
 
   toggle(): void {
     this.expanded = !this.expanded;

@@ -1,15 +1,22 @@
 <div>
   <h2>MtG Card Info</h2>
-  <!-- [card]="card" satisfies child's card = input.required<Mtg>() -->
-  @for (card of mtgList(); track card.id) {
-    <app-mtg-list-item
-      [card] = "card"
-      (opened) = "onCardOpened($event)"
-      (removeId) = "onRemove($event)" /> <!-- Listens for removeId output -->
+  @if (isLoading()) {
+    <p>Loading cards...</p>
+  } @else if (error()) {
+    <p class="error">Couldn't load cards from Scryfall</p>
+    <pre>{{ error()?.message }}</pre>
+  } @else {
+    <!-- [card]="card" satisfies child's card = input.required<Mtg>() -->
+    @for (card of mtgList(); track card.id) {
+      <app-mtg-list-item
+        [card] = "card"
+        (opened) = "onCardOpened($event)"
+        (removeId) = "onRemove($event)" /> <!-- Listens for removeId output -->
 
-  } @empty {
-    <br>
-    <p>There's nothing here!</p>
+    } @empty {
+      <br>
+      <p>There's nothing here!</p>
+    }
   }
 </div>
 <div>

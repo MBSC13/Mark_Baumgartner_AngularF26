@@ -36,15 +36,15 @@ export class MtgForm {
       if (id === undefined) {
         return;
       }
-      const mtg = this.service.getMtg(Number(id));
+      const mtg = this.service.getMtg(id);
       if (mtg) {
-        this.mtgForm.patchValue({
-          name: mtg.name,
-          color: mtg.color,
-          manaCost: mtg.manaCost,
-          cardType: mtg.cardType,
-          creatureType: mtg.creatureType
-        });
+        this.mtgForm.patchValue( mtg );
+        //   name: mtg.name,
+        //   color: mtg.color,
+        //   manaCost: mtg.manaCost,
+        //   cardType: mtg.cardType,
+        //   creatureType: mtg.creatureType
+        // }); Unnecessary
       }
     });
   }
@@ -53,12 +53,12 @@ export class MtgForm {
     if (this.mtgForm.invalid) return;
 
     const value = this.mtgForm.getRawValue();
-    const id = this.isEditMode() ? Number(this.id()) : this.service.nextId();
+    const id = this.id() ?? this.service.nextId();
 
     if (this.isEditMode()) {
       this.service.updateMtg({ id, ...value });
     } else {
-      this.service.addCard({ id: this.service.nextId(), ...value });
+      this.service.addCard({ id, ...value });
     }
     this.mtgForm.reset({ cardType: ''});
     this.router.navigate(['/mtg', id]);

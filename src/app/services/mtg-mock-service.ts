@@ -68,7 +68,7 @@ export class MtgMockService {
 
   //removeCard filters the current array by building a new one with every card whose id does not equal the one passed in.
   //The new array replaces the old one
-  removeCard(id: number) {
+  removeCard(id: string) {
     this.mtgCards.update((list) => list.filter((c) => c.id !== id));
   }
 }

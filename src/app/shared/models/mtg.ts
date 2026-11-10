@@ -1,12 +1,23 @@
 export interface Mtg {
-  id: number;
+  id: string;
   name: string;
   color: string;
   manaCost: string | number;
   cardType: string;
-  // cardText: string;
   creatureType?: string;
-  // power?: number;
-  // toughness?: number;
-  // foil?: boolean;
+}
+
+export interface ScryfallCard {
+  id: string;
+  name: string;
+  type_line: string;
+  mana_cost?: string;
+  colors?: string[];
+}
+
+export interface ScryfallList {
+  object: 'list';
+  has_more: boolean;
+  total_cards?: number;
+  data: ScryfallCard[];
 }

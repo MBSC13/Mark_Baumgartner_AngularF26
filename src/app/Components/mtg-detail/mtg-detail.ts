@@ -14,10 +14,10 @@ export class MtgDetail {
   protected mtgService = inject(MtgService);
   // private router = inject(Router);
   //declares output event that carries a number, to hold id to pass along to removeCard
-  removeId = output<number>();
+  removeId = output<string>();
 
 
   id = input.required<string>();
 
-  protected mtg = computed(() => this.mtgService.getById(Number(this.id())));
+  protected mtg = computed(() => this.mtgService.getById(this.id()));
 }

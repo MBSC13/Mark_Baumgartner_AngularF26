@@ -2,7 +2,7 @@ import { InjectionToken } from '@angular/core';
 
 export interface MtgConfig {
   apiBaseUrl: string;
-  defaultId: number;
+  defaultId: string;
   defaultName: string;
   defaultManaCost: string;
   defaultColor: string;

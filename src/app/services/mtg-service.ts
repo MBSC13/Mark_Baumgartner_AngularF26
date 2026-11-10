@@ -1,65 +1,79 @@
 import { computed, effect, inject, Service, signal } from '@angular/core';
-import { Mtg } from '../shared/models/mtg';
+import { Mtg, ScryfallCard, ScryfallList } from '../shared/models/mtg';
 import { MTG_CONFIG } from '../shared/mtg-config';
+import { httpResource } from '@angular/common/http';
 
 @Service()
 export class MtgService {
   private config = inject(MTG_CONFIG);
-  readonly apiBaseUrl = this.config.apiBaseUrl;
 
+  private cardsResource = httpResource<Mtg[]>(
+    () => ({
+      url: `${this.config.apiBaseUrl}/cards/search`,
+      params: { q: 'set:lrw', order: 'name' },
+    }),
+    {
+      defaultValue: [],
+      parse: (raw) => (raw as ScryfallList).data.slice(0, 20).map(toMtg),
+    }
+  );
+  //Writable signal to replace signal<Mtg[]>([...])
+  private mtgCards = this.cardsResource.value;
 
-  private mtgCards = signal<Mtg[]>([
-    {
-      id: 1,
-      name: 'Guile',
-      color: 'Blue',
-      manaCost: '3UUU',
-      cardType: 'Creature',
-      creatureType: 'Elemental Incarnation',
-    },
-    {
-      id: 2,
-      name: 'Mass of Ghouls',
-      color: 'Black',
-      manaCost: '3BB',
-      cardType: 'Creature',
-      creatureType: 'Zombie Warrior',
-    },
-
-    {
-      id: 3,
-      name: 'Prismatic Lace',
-      color: 'Blue',
-      manaCost: 'U',
-      cardType: 'Instant',
-    },
-    {
-      id: 4,
-      name: "Executioner's Hood",
-      color: 'Colorless',
-      manaCost: 2,
-      cardType: 'Artifact',
-      creatureType: 'Equipment',
-    },
-    {
-      id: 5,
-      name: 'Channel',
-      color: 'Green',
-      manaCost: 'GG',
-      cardType: 'Sorcery',
-    },
-
-    {
-      id: 6,
-      name: "Chandra's Outrage",
-      color: 'Red',
-      manaCost: '2RR',
-      cardType: 'Instant',
-    },
-  ]);
+  // private mtgCards = signal<Mtg[]>([
+  //   {
+  //     id: 1,
+  //     name: 'Guile',
+  //     color: 'Blue',
+  //     manaCost: '3UUU',
+  //     cardType: 'Creature',
+  //     creatureType: 'Elemental Incarnation',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Mass of Ghouls',
+  //     color: 'Black',
+  //     manaCost: '3BB',
+  //     cardType: 'Creature',
+  //     creatureType: 'Zombie Warrior',
+  //   },
+  //
+  //   {
+  //     id: 3,
+  //     name: 'Prismatic Lace',
+  //     color: 'Blue',
+  //     manaCost: 'U',
+  //     cardType: 'Instant',
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Executioner's Hood",
+  //     color: 'Colorless',
+  //     manaCost: '2',
+  //     cardType: 'Artifact',
+  //     creatureType: 'Equipment',
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'Channel',
+  //     color: 'Green',
+  //     manaCost: 'GG',
+  //     cardType: 'Sorcery',
+  //   },
+  //
+  //   {
+  //     id: 6,
+  //     name: "Chandra's Outrage",
+  //     color: 'Red',
+  //     manaCost: '2RR',
+  //     cardType: 'Instant',
+  //   },
+  // ]);
 
   //Read-only version for components to consume
-  mtgList = this.mtgCards.asReadonly();
+  mtgList = computed(() => (this.cardsResource.error() ? [] : this.mtgCards()));
+  isLoading = this.cardsResource.isLoading;
+  error = this.cardsResource.error;
 
   //hasSecondary uses computed() to filter for cards with a secondary type
   hasSecondary = computed(() => this.mtgList().filter((c) => c.creatureType));
@@ -75,7 +89,7 @@ export class MtgService {
 
   secondaryLog = effect(() => {
     console.log("There are " + this.secondaryCount() + " cards with secondary type in mtgList");
-  })
+  });
 
   //addCard method to add a new item to the list using update()
   //Spread operator makes it possible to always add onto the end of the array
@@ -85,7 +99,7 @@ export class MtgService {
 
   //removeCard filters the current array by building a new one with every card whose id does not equal the one passed in.
   //The new array replaces the old one
-  removeCard(id: number){
+  removeCard(id: string){
     this.mtgCards.update((list) => list.filter(c => c.id !== id));
   }
 
@@ -94,17 +108,35 @@ export class MtgService {
   }
 
   //Used by the form when editing
-  getMtg(id: number): Mtg | undefined {
+  getMtg(id: string): Mtg | undefined {
     return this.getById(id);
   }
 
   //Used to provide an id to new mtg objects
-  nextId(): number {
-    return Math.max(0, ...this.mtgList().map((c) => c.id)) + 1;
+  nextId(): string {
+    return crypto.randomUUID();
   }
 
   //Returns matching mtg object, searches by id
-  getById(id: number) : Mtg | undefined {
+  getById(id: string) : Mtg | undefined {
     return this.mtgList().find((c) => c.id === id);
+  }
+}
+
+const COLOR_NAMES: Record<string, string> = {
+  W: 'White', U: 'Blue', B: 'Black', R: 'Red', G: 'Green'
+};
+
+function toMtg(card: ScryfallCard): Mtg {
+  const [cardType, creatureType] = card.type_line.split(' - ');
+  const colors = card.colors ?? [];
+
+  return {
+    id: card.id,
+    name: card.name,
+    color: colors.length ? colors.map((c) => COLOR_NAMES[c]).join(' ') : 'Colorless',
+    manaCost: (card.mana_cost ?? '').replace(/[{}]/g, ''),
+    cardType,
+    creatureType,
   }
 }
