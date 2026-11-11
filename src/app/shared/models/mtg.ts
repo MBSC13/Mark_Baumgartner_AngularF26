@@ -1,3 +1,6 @@
+
+//The original interface (id changed to string now)
+//Now mapped to from API data
 export interface Mtg {
   id: string;
   name: string;
@@ -7,6 +10,8 @@ export interface Mtg {
   creatureType?: string;
 }
 
+//API model
+//type_line is split() into cardType and creatureType
 export interface ScryfallCard {
   id: string;
   name: string;
@@ -15,6 +20,7 @@ export interface ScryfallCard {
   colors?: string[];
 }
 
+//List model to hold array of query results
 export interface ScryfallList {
   object: 'list';
   has_more: boolean;

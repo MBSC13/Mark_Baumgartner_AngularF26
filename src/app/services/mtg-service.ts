@@ -10,14 +10,16 @@ export class MtgService {
   private cardsResource = httpResource<Mtg[]>(
     () => ({
       url: `${this.config.apiBaseUrl}/cards/search`,
+      //?q=set:lrw&order=name
       params: { q: 'set:lrw', order: 'name' },
     }),
     {
+      //Default value before response gets parsed and mapped
       defaultValue: [],
       parse: (raw) => (raw as ScryfallList).data.slice(0, 20).map(toMtg),
     }
   );
-  //Writable signal to replace signal<Mtg[]>([...])
+  //API friendly writable signal to replace the old one
   private mtgCards = this.cardsResource.value;
 
   // private mtgCards = signal<Mtg[]>([
@@ -113,6 +115,7 @@ export class MtgService {
   }
 
   //Used to provide an id to new mtg objects
+  //Updated to create a UUID string rather than a number
   nextId(): string {
     return crypto.randomUUID();
   }
@@ -122,12 +125,15 @@ export class MtgService {
     return this.mtgList().find((c) => c.id === id);
   }
 }
-
+//Assign color letters returned from the API as keys paired with the full words
 const COLOR_NAMES: Record<string, string> = {
   W: 'White', U: 'Blue', B: 'Black', R: 'Red', G: 'Green'
 };
 
+//Converts (maps) API model onto the original
+//Returns Mtg object
 function toMtg(card: ScryfallCard): Mtg {
+  //Splits type_line field in two to match Mtg model properties
   const [cardType, creatureType] = card.type_line.split(' - ');
   const colors = card.colors ?? [];
 

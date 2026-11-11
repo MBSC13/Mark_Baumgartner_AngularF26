@@ -4,6 +4,9 @@
   <button (click)="authGuard.toggle()">
     {{ authGuard.guardEnabled() ? 'Lock Editing' : 'Unlock Editing' }}
   </button>
+  @if (loading.isLoading()) {
+    <span class="loading">Loading...</span>
+  }
 </nav>
 
 

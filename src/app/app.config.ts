@@ -4,11 +4,15 @@ import { routes } from './app.routes';
 import { MTG_CONFIG } from './shared/mtg-config';
 import { MtgMockService } from './services/mtg-mock-service';
 import { MtgService } from './services/mtg-service';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { loadingInterceptor } from './interceptors/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
+    //Register interceptor
+    provideHttpClient(withInterceptors([loadingInterceptor])),
     {
       provide: MTG_CONFIG,
       useValue: {
