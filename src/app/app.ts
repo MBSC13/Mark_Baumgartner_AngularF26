@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Mtg } from './shared/models/mtg';
 import { AuthGuard } from './services/auth.guard';
 import { LoadingService } from './services/loading-service';
+import { ErrorService } from './services/error-service';
 
 @Component({
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
@@ -13,4 +14,5 @@ import { LoadingService } from './services/loading-service';
 export class App {
   protected authGuard = inject(AuthGuard);
   protected loading = inject(LoadingService);
+  protected errors = inject(ErrorService);
 }

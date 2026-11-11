@@ -6,13 +6,19 @@ import { MtgMockService } from './services/mtg-mock-service';
 import { MtgService } from './services/mtg-service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loadingInterceptor } from './interceptors/loading-interceptor';
+import { errorInterceptor } from './interceptors/error-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
-    //Register interceptor
-    provideHttpClient(withInterceptors([loadingInterceptor])),
+    /*
+     Registering interceptors:
+     Interceptors form a chain where each interceptor processes the request or response
+     before forwarding to the next interceptor in the chain.
+     I don't think the order matters here because the two don't interact with each other
+     */
+    provideHttpClient(withInterceptors([loadingInterceptor, errorInterceptor])),
     {
       provide: MTG_CONFIG,
       useValue: {

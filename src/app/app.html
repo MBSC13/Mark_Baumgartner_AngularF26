@@ -1,3 +1,12 @@
+<!-- Displays error banner if in error state -->
+<!-- uses aliasing to store error message in a local variable -->
+@if (errors.message(); as message) {
+  <div class="error-banner">
+    <span>{{ message }}</span>
+    <button class="dismiss-btn" (click)="errors.clear()">Dismiss</button>
+  </div>
+}
+
 <nav class="nav-bar">
   <a routerLink="/mtg" routerLinkActive="active">Card List</a>
   <a routerLink="/add" routerLinkActive="active">Add a Card</a>
