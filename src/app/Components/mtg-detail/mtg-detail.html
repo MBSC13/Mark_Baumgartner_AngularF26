@@ -8,14 +8,14 @@
       Keywords: {{ c.keywords | lowercase }}
       <br>
       Rarity: {{ c.rarity | rarityStars }}
-      <br>
-      Release Date: {{ c.releaseDate | date: 'shortDate' }}
-      <br>
-      Days Since Release: {{ c.releaseDate | daysPassed }}</p>
-    <p>Card Type: {{ c.cardType | titlecase }}</p>
+    <p>Card Type: {{ c.cardType | titlecase }}
     @if (c.creatureType) {
       <p>Creature Type: {{ c.creatureType }}</p>
     }
+    <br>
+    Release Date: {{ c.releaseDate | date: 'shortDate' }}
+    <br>
+    Days Since Release: {{ c.releaseDate | daysPassed }} </p>
     <div class="colorBadge">
       @switch (c.color) {
         @case ('Red') { <img ngSrc="/images/red.png" height="64" width="64" alt=""> }
@@ -41,5 +41,3 @@
   <p>No card with id {{ id() }}.</p>
   <a routerLink="/mtg">Back to Card List</a>
 }
-
-

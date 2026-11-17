@@ -65,3 +65,16 @@ This project uses the Scryfall api.
 Documentation: https://scryfall.com/docs/api
 
 Example request URL: https://api.scryfall.com/cards/named?fuzzy=black+lotus
+
+## Lazy Loading:
+
+Initial chunk files | Names          |  Raw size | Estimated transfer size
+main-LOALFKR2.js    | main           | 311.62 kB |                85.88 kB
+styles-5INURTSO.css | styles         |   0 bytes |                 0 bytes
+
+                    | Initial total  | 311.62 kB |                85.88 kB
+
+Lazy chunk files    | Names          |  Raw size | Estimated transfer size
+chunk-CLYMvU3m.js   | mtg-form       |  48.15 kB |                10.84 kB
+chunk-CrB0qbXg.js   | mtg-detail     |   4.09 kB |                 1.52 kB
+chunk-DqSXd7Uo.js   | page-not-found | 505 bytes |               505 bytes
