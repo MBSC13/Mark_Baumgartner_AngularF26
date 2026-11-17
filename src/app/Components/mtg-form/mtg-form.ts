@@ -28,6 +28,7 @@ export class MtgForm {
     creatureType: [''],
     releaseDate: [''],
     keywords: [''],
+    rarity: [''],
   },
     { validators: colorValidator } //This is where you attach the Validator for the whole FormGroup
   );

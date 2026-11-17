@@ -29,6 +29,7 @@ export const appConfig: ApplicationConfig = {
         defaultCreatureType: 'Test',
         defaultReleaseDate: 'Test',
         defaultKeywords: 'Test',
+        defaultRarity: 'Test',
       },
     },
 

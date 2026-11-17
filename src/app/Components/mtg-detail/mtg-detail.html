@@ -7,7 +7,11 @@
       <br>
       Keywords: {{ c.keywords | lowercase }}
       <br>
-      Release Date: {{ c.releaseDate | date: 'shortDate' }}</p>
+      Rarity: {{ c.rarity | rarityStars }}
+      <br>
+      Release Date: {{ c.releaseDate | date: 'shortDate' }}
+      <br>
+      Days Since Release: {{ c.releaseDate | daysPassed }}</p>
     <p>Card Type: {{ c.cardType | titlecase }}</p>
     @if (c.creatureType) {
       <p>Creature Type: {{ c.creatureType }}</p>

@@ -10,6 +10,7 @@ export interface Mtg {
   creatureType?: string;
   releaseDate: string;
   keywords: string;
+  rarity: string;
 }
 
 //API model
@@ -22,6 +23,7 @@ export interface ScryfallCard {
   colors?: string[];
   released_at: string;
   keywords: string[];
+  rarity: string;
 }
 
 //List model to hold array of query results

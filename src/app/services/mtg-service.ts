@@ -147,5 +147,6 @@ function toMtg(card: ScryfallCard): Mtg {
     creatureType,
     releaseDate: card.released_at,
     keywords,
+    rarity: card.rarity,
   }
 }
