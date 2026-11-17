@@ -2,8 +2,6 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { MTG_CONFIG } from './shared/mtg-config';
-import { MtgMockService } from './services/mtg-mock-service';
-import { MtgService } from './services/mtg-service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { loadingInterceptor } from './interceptors/loading-interceptor';
 import { errorInterceptor } from './interceptors/error-interceptor';
@@ -29,6 +27,8 @@ export const appConfig: ApplicationConfig = {
         defaultColor: 'Colorless',
         defaultCardType: 'Test',
         defaultCreatureType: 'Test',
+        defaultReleaseDate: 'Test',
+        defaultKeywords: 'Test',
       },
     },
 

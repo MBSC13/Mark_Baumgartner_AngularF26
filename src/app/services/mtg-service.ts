@@ -136,6 +136,7 @@ function toMtg(card: ScryfallCard): Mtg {
   //Splits type_line field in two to match Mtg model properties
   const [cardType, creatureType] = card.type_line.split(' - ');
   const colors = card.colors ?? [];
+  const keywords = card.keywords.toString();
 
   return {
     id: card.id,
@@ -144,5 +145,7 @@ function toMtg(card: ScryfallCard): Mtg {
     manaCost: (card.mana_cost ?? '').replace(/[{}]/g, ''),
     cardType,
     creatureType,
+    releaseDate: card.released_at,
+    keywords,
   }
 }

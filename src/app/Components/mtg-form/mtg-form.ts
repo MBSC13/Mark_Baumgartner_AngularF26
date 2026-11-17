@@ -26,6 +26,8 @@ export class MtgForm {
     manaCost: ['' as string | number, [Validators.required, manaCostValidator]],
     cardType: ['', Validators.required],
     creatureType: [''],
+    releaseDate: [''],
+    keywords: [''],
   },
     { validators: colorValidator } //This is where you attach the Validator for the whole FormGroup
   );

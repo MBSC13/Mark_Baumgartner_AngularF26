@@ -3,8 +3,12 @@
     <h3>{{ c.name }}</h3>
     <p>Color: {{ c.color }}
       <br>
-      Mana Cost: {{ c.manaCost }}</p>
-    <p>Card Type: {{ c.cardType }}</p>
+      Mana Cost: {{ c.manaCost }}
+      <br>
+      Keywords: {{ c.keywords | lowercase }}
+      <br>
+      Release Date: {{ c.releaseDate | date: 'shortDate' }}</p>
+    <p>Card Type: {{ c.cardType | titlecase }}</p>
     @if (c.creatureType) {
       <p>Creature Type: {{ c.creatureType }}</p>
     }

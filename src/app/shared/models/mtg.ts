@@ -8,6 +8,8 @@ export interface Mtg {
   manaCost: string | number;
   cardType: string;
   creatureType?: string;
+  releaseDate: string;
+  keywords: string;
 }
 
 //API model
@@ -18,6 +20,8 @@ export interface ScryfallCard {
   type_line: string;
   mana_cost?: string;
   colors?: string[];
+  released_at: string;
+  keywords: string[];
 }
 
 //List model to hold array of query results
