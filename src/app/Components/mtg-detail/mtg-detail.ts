@@ -27,4 +27,15 @@ export class MtgDetail {
   id = input.required<string>();
 
   protected mtg = computed(() => this.mtgService.getById(this.id()));
+  private opened = Date.now();
+  private dateTime = new Date().toLocaleString();
+
+  ngOnInit() {
+    //Need optional chaining operator here. Throws an error without it because getById could return undefined
+    console.log('[lifecycle] opened: ' + this.mtg()?.name + ' at ' + this.dateTime);
+  }
+
+  ngOnDestroy() {
+    console.log('[lifecycle] closed: ' + this.mtg()?.name + ' after ' + Math.floor((Date.now() - this.opened) / 1000) + " seconds");
+  }
 }
