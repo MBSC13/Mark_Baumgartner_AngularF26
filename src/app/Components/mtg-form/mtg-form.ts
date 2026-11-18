@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input } from '@angular/core';
+import { afterNextRender, Component, computed, effect, ElementRef, inject, input, viewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MtgService } from '../../services/mtg-service';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ export class MtgForm {
   private fb = inject(FormBuilder);
   private service = inject(MtgService);
   private router = inject(Router);
+  protected firstField = viewChild.required<ElementRef<HTMLInputElement>>('firstField');
 
   id = input<string>();
 
@@ -34,6 +35,12 @@ export class MtgForm {
   );
 
   constructor() {
+    //ngOnInit runs before the template is rendered, before the input exists
+    //while afterNextRender runs after it does
+    afterNextRender(() => {
+      this.firstField().nativeElement.focus();
+    })
+
     effect(() => {
       const id = this.id();
       if (id === undefined) {
