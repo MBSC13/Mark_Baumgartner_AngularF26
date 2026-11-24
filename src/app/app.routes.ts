@@ -22,7 +22,6 @@ export const routes: Routes = [
     loadComponent: () => import('./Components/mtg-form/mtg-form').then((m) => m.MtgForm),
     canActivate: [toggleGuard],
   },
-  // { path: 'edit/:id', component: MtgForm, canActivate: [toggleGuard] },
   { path: '**',
     loadComponent: () => import('./page-not-found/page-not-found').then((m) => m.PageNotFound) },
 ];

@@ -1,7 +1,7 @@
 <form class="mtg-form" [formGroup]="mtgForm" (ngSubmit)="onSubmit()">
   <label>
     Name
-    <input #firstField formControlName="name" placeholder="Name" />
+    <input #focusField formControlName="name" placeholder="Name" />
   </label>
   @if(mtgForm.controls.name.touched && mtgForm.controls.name.invalid) {
     <p class="error">Name required. Minimum 2 characters.</p>

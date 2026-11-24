@@ -15,7 +15,7 @@ export class MtgForm {
   private fb = inject(FormBuilder);
   private service = inject(MtgService);
   private router = inject(Router);
-  protected firstField = viewChild.required<ElementRef<HTMLInputElement>>('firstField');
+  protected focusField = viewChild.required<ElementRef<HTMLInputElement>>('firstField');
 
   id = input<string>();
 
@@ -38,7 +38,7 @@ export class MtgForm {
     //ngOnInit runs before the template is rendered, before the input exists
     //while afterNextRender runs after it does
     afterNextRender(() => {
-      this.firstField().nativeElement.focus();
+      this.focusField().nativeElement.focus();
     })
 
     effect(() => {
